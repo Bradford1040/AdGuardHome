@@ -77,7 +77,7 @@ func (web *webAPI) handleVersionJSON(w http.ResponseWriter, r *http.Request) {
 }
 
 // requestVersionInfo sets the VersionInfo field of resp if it can reach the
-// update server.
+// update server.  resp must not be nil.
 func (web *webAPI) requestVersionInfo(
 	ctx context.Context,
 	resp *versionResponse,
@@ -109,6 +109,7 @@ func (web *webAPI) requestVersionInfo(
 	}
 
 	if err != nil {
+		web.logger.InfoContext(ctx, "getting version info", slogutil.KeyError, err)
 		return fmt.Errorf("getting version info: %w", err)
 	}
 
@@ -128,7 +129,7 @@ func (web *webAPI) handleUpdate(w http.ResponseWriter, r *http.Request) {
 			r,
 			w,
 			http.StatusBadRequest,
-			"/update request isn't allowed now",
+			"update request isn't allowed now",
 		)
 
 		return
