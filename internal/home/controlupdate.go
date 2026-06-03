@@ -109,7 +109,8 @@ func (web *webAPI) requestVersionInfo(
 	}
 
 	if err != nil {
-		web.logger.InfoContext(ctx, "getting version info", slogutil.KeyError, err)
+		web.logger.WarnContext(ctx, "getting version info", slogutil.KeyError, err)
+
 		return fmt.Errorf("getting version info: %w", err)
 	}
 

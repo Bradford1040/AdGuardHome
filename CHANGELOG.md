@@ -18,6 +18,12 @@ See also the [v0.107.78 GitHub milestone][ms-v0.107.78].
 NOTE: Add new changes BELOW THIS COMMENT.
 -->
 
+### Added
+
+- Improved updater logging to give users more insight into the problem with version updating ([#8410]).
+
+[#8410]: https://github.com/AdguardTeam/AdGuardHome/issues/8410
+
 ### Fixed
 
 - Blocked services check on the Custom filtering rules page does not work properly without specifying of a client.

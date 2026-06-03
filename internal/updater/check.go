@@ -49,7 +49,7 @@ func (u *Updater) VersionInfo(ctx context.Context, forceRecheck bool) (vi Versio
 	}
 
 	vcu := u.versionCheckURL
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, vcu, http.NoBody)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, vcu, nil)
 	if err != nil {
 		return VersionInfo{}, fmt.Errorf("constructing request to %s: %w", vcu, err)
 	}
@@ -85,6 +85,8 @@ func (u *Updater) VersionInfo(ctx context.Context, forceRecheck bool) (vi Versio
 	return u.prevCheckResult, u.prevCheckError
 }
 
+// parseVersionResponse parses version-related data and unmarshals it into the
+// [VersionInfo] structure.
 func (u *Updater) parseVersionResponse(
 	ctx context.Context,
 	data []byte,
@@ -120,7 +122,7 @@ func (u *Updater) parseVersionResponse(
 
 	isNewVersion := info.NewVersion != u.version
 	if isNewVersion {
-		u.logger.WarnContext(
+		u.logger.InfoContext(
 			ctx,
 			"a new version is available",
 			"current_version", u.version,
@@ -129,7 +131,7 @@ func (u *Updater) parseVersionResponse(
 	} else {
 		u.logger.DebugContext(
 			ctx,
-			"the current version is actual",
+			"the current version is up-to-date",
 			"current_version", u.version,
 		)
 	}
