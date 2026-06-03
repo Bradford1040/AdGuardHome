@@ -155,8 +155,8 @@ type Config struct {
 	// files can be added.
 	SafeFSPatterns []string `yaml:"safe_fs_patterns"`
 
-	// MaxHTTPSize defines the maximum size of the HTTP body.  This value must
-	// be greater than or equal to zero.
+	// MaxHTTPSize defines the maximum size of the HTTP body.  The value must
+	// not be equal to zero.
 	MaxHTTPSize datasize.ByteSize `yaml:"max_http_size"`
 
 	SafeBrowsingCacheSize uint `yaml:"safebrowsing_cache_size"` // (in bytes)

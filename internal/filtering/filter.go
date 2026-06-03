@@ -32,8 +32,7 @@ const filterDir = "filters"
 // TODO(e.burkov):  Investigate if the field ordering is important.
 type FilterYAML struct {
 	Enabled bool
-	// TODO(m.kazantsev):  This is awful and extremely misleading. It should be
-	// refactored.
+	// TODO(m.kazantsev):  Refactor.
 	URL         string    // URL or a file path
 	Name        string    `yaml:"name"`
 	RulesCount  int       `yaml:"-"`
@@ -528,11 +527,11 @@ func (d *DNSFilter) updateIntl(ctx context.Context, flt *FilterYAML) (ok bool, e
 		}
 	}
 
-	return res.Checksum != flt.checksum && err == nil, nil
+	return res.Checksum != flt.checksum, nil
 }
 
 // readFromHTTP reads filter data from urlStr via HTTP and parses it into the
-// tmpFile file.  dst must not be nil.  urlStr must be a valid URL.
+// tmpFile file.  tmpFile must not be nil.  urlStr must be a valid URL.
 func (d *DNSFilter) readFromHTTP(
 	tmpFile aghrenameio.PendingFile,
 	urlStr string,
@@ -558,7 +557,7 @@ func (d *DNSFilter) readFromHTTP(
 }
 
 // readFromFile reads filter data from a file located at path and parses it into
-// the tmpFile file.  dst must not be nil.  path must be a valid filepath.
+// the tmpFile file.  tmpFile must not be nil.  path must be a valid filepath.
 func (d *DNSFilter) readFromFile(
 	tmpFile aghrenameio.PendingFile,
 	path string,

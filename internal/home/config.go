@@ -20,6 +20,7 @@ import (
 	"github.com/AdguardTeam/AdGuardHome/internal/dhcpd"
 	"github.com/AdguardTeam/AdGuardHome/internal/dnsforward"
 	"github.com/AdguardTeam/AdGuardHome/internal/filtering"
+	"github.com/AdguardTeam/AdGuardHome/internal/filtering/rulelist"
 	"github.com/AdguardTeam/AdGuardHome/internal/querylog"
 	"github.com/AdguardTeam/AdGuardHome/internal/schedule"
 	"github.com/AdguardTeam/AdGuardHome/internal/stats"
@@ -28,7 +29,6 @@ import (
 	"github.com/AdguardTeam/golibs/logutil/slogutil"
 	"github.com/AdguardTeam/golibs/netutil"
 	"github.com/AdguardTeam/golibs/timeutil"
-	"github.com/c2h5oh/datasize"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/renameio/v2/maybe"
 	yaml "go.yaml.in/yaml/v4"
@@ -567,7 +567,7 @@ var config = &configuration{
 
 		// NOTE: To disable the limitation, simply set a large size, such as
 		// [datasize.TB].
-		MaxHTTPSize:           256 * datasize.MB,
+		MaxHTTPSize:           rulelist.DefaultMaxRuleListSize,
 		SafeBrowsingCacheSize: 1 * 1024 * 1024,
 		SafeSearchCacheSize:   1 * 1024 * 1024,
 		ParentalCacheSize:     1 * 1024 * 1024,
