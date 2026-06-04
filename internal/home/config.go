@@ -565,8 +565,6 @@ var config = &configuration{
 		ParentalEnabled:     false,
 		SafeBrowsingEnabled: false,
 
-		// NOTE: To disable the limitation, simply set a large size, such as
-		// [datasize.TB].
 		MaxHTTPSize:           rulelist.DefaultMaxRuleListSize,
 		SafeBrowsingCacheSize: 1 * 1024 * 1024,
 		SafeSearchCacheSize:   1 * 1024 * 1024,
